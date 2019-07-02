@@ -155,7 +155,8 @@ function addTooltip(node, player) {
     let gendericon = player.gender === 'female' ? '/jeu/assets/images/girl.png' : '/jeu/assets/images/boy.png';
     let premiumdisabled = player.isPremium ? "" : "disabled";    
 
-    let gameinfosinnerhtml, gamebarinnerhtml;
+    let gameinfosinnerhtml = "";
+    let gamebarinnerhtml = "";
     if (player.playedGames !== 0) {
         let pointsPerGame = (player.points / player.playedGames).toFixed(2);
 
