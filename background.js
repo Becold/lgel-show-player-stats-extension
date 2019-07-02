@@ -6,8 +6,8 @@ var hoverEvt = new MouseEvent('mouseover', {
     cancelable: true,
 });
 
-console.log("Players stats viewer loaded 1");
-window.addEventListener('load', function() {    
+(function() {
+
     if (window.location.href.indexOf('/jeu/index.php?partie=') !== -1 || 
         window.location.href.indexOf('/jeu/index.php?premier=true') !== -1) {
         console.log("Players stats viewer loaded");
@@ -23,15 +23,15 @@ window.addEventListener('load', function() {
                 display: flex
                 flex-direction: row;
             }
-        
+
             .PSV_profile-infos-user {
                 flex: 0.25;
             }
-        
+
             .PSV__username {
                 text-shadow: 0 2px 2px rgba(0, 0, 0, .2)
             }
-        
+
             .PSV__profile-icons {
                 display: -webkit-box;
                 display: -ms-flexbox;
@@ -46,7 +46,7 @@ window.addEventListener('load', function() {
                 font-weight: 700;
                 font-family: Montserrat, sans-serif
             }
-        
+
             .PSV__profile-icons img {
                 display: block;
                 width: 32px;
@@ -54,22 +54,22 @@ window.addEventListener('load', function() {
                 margin: 0 5px;
                 margin-bottom: 2px
             }
-        
+
             .PSV__profile-icons img[disabled] {
                 -webkit-filter: brightness(70%) grayscale(1);
                 filter: brightness(70%) grayscale(1)
             }
-        
+
             .PSV__games {
                 margin-left: 20px;
             }
-        
+
             .PSV__games-statistics .PSV__games-played img {
                 height: 18px;
                 margin-right: 10px;
                 vertical-align: -2px;
             }
-        
+
             .PSV__games-statistics .PSV__games-statistics-wrapper {
                 margin: auto;
                 position: relative;
@@ -79,7 +79,7 @@ window.addEventListener('load', function() {
                 border-radius: 5px 5px 0 0;
                 padding: 5px 10px;
             }
-        
+
             .PSV__games-bar {
                 display: -webkit-box;
                 display: -ms-flexbox;
@@ -88,31 +88,31 @@ window.addEventListener('load', function() {
                 border-radius: 0 0 3px 3px;
                 overflow: hidden
             }
-        
+
             .PSV__games-bar .PSV__games-bar-section {
                 height: 100%
             }
-        
+
             .PSV__type-0 {
                 background-color: #87a254
             }
-        
+
             .PSV__type-1 {
                 background-color: #1d84b1
             }
-        
+
             .PSV__type-2 {
                 background-color: #ef3a3a
             }
-        
+
             .PSV__type-3 {
                 background-color: #a08aa6
             }
-        
+
             .PSV__type-6 {
                 background-color: #653320
             }
-        
+
             .PSV__type-9 {
                 background-color: #919100
             }
@@ -120,7 +120,6 @@ window.addEventListener('load', function() {
         document.body.appendChild(node);
 
         document.querySelector('#block_players .block_content').addEventListener('mouseover', (e) => {
-            console.log("hovering");
             let elHovered = e.target;
 			if (!elHovered.classList.contains('list_player')) {
 				if (elHovered.classList.contains('player') && elHovered.dataset.playerstatloaded) {
@@ -148,14 +147,16 @@ window.addEventListener('load', function() {
 			}
 		});
     }
-});
+
+    
+})();
 
 function addTooltip(node, player) {
     let gendericon = player.gender === 'female' ? '/jeu/assets/images/girl.png' : '/jeu/assets/images/boy.png';
     let premiumdisabled = player.isPremium ? "" : "disabled";    
 
     let gameinfosinnerhtml, gamebarinnerhtml;
-	if (player.playedGames !== 0) {
+    if (player.playedGames !== 0) {
         let pointsPerGame = (player.points / player.playedGames).toFixed(2);
 
         gameinfosinnerhtml = `
